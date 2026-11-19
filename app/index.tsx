@@ -6,9 +6,9 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useSessao } from "../src/sessao/SessaoProvider";
-import { colors, fonts, gradients, radius, spacing } from "../src/theme/tokens";
+import { colors, fonts, radius, spacing } from "../src/theme/tokens";
 
-const FUNDO = require("../assets/images/splash-bg.jpg");
+const FUNDO = require("../assets/images/locais/praia-da-graciosa-1.png");
 
 export default function Abertura() {
   const router = useRouter();
@@ -52,14 +52,14 @@ export default function Abertura() {
         accessible={false}
       />
       <LinearGradient
-        colors={gradients.screenTop.colors}
-        locations={gradients.screenTop.locations}
+        colors={["rgba(18, 16, 14, 0.46)", "rgba(18, 16, 14, 0.12)", "transparent"]}
+        locations={[0, 0.2, 0.42]}
         style={StyleSheet.absoluteFill}
         pointerEvents="none"
       />
       <LinearGradient
-        colors={gradients.screenBottom.colors}
-        locations={gradients.screenBottom.locations}
+        colors={["transparent", "rgba(18, 16, 14, 0.28)", "rgba(18, 16, 14, 0.82)"]}
+        locations={[0.36, 0.66, 1]}
         style={StyleSheet.absoluteFill}
         pointerEvents="none"
       />
