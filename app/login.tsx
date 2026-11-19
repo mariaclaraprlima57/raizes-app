@@ -24,6 +24,7 @@ import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { usePreferencias } from "../src/preferencias/PreferenciasProvider";
+import { buscarPreferencias } from "../src/preferencias/sincronizar";
 import { useSessao } from "../src/sessao/SessaoProvider";
 import { autenticar } from "../src/sessao/autenticar";
 import {
@@ -254,6 +255,24 @@ export default function Login() {
 
       await entrar(resultado.email, resultado.nome, resultado.usuarioId);
 
+      // O estado do provider ainda pertence ao momento anterior ao login.
+      // Confere a linha da própria conta antes de decidir se este é realmente
+      // o primeiro acesso. Se a rede falhar, preserva o dado já salvo neste
+      // aparelho e a sincronização do provider tenta novamente em seguida.
+      let onboardingDaConta = onboardingConcluido;
+      if (resultado.usuarioId) {
+        try {
+          const preferenciasDaConta = await buscarPreferencias(resultado.usuarioId);
+          onboardingDaConta = preferenciasDaConta === null
+            ? false
+            : preferenciasDaConta.onboardingConcluido
+              && preferenciasDaConta.cidadeId !== null
+              && preferenciasDaConta.interesses.length > 0;
+        } catch {
+          // O login também funciona no modo local, sem Supabase configurado.
+        }
+      }
+
       // Sucesso visível antes de navegar: o check cresce, o aparelho confirma.
       setSucesso(true);
       vibrar(() =>
@@ -272,7 +291,7 @@ export default function Login() {
       }
       // `enviando` fica ligado de propósito: a tela some com o replace e um
       // segundo toque no botão durante a transição não pode entrar de novo.
-      router.replace(onboardingConcluido ? DESTINO_APOS_LOGIN : DESTINO_SEM_ONBOARDING);
+      router.replace(onboardingDaConta ? DESTINO_APOS_LOGIN : DESTINO_SEM_ONBOARDING);
     } catch {
       const mensagem = "Não deu para guardar sua entrada. Tenta de novo.";
       setErroGeral(mensagem);
