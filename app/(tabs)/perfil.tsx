@@ -1,3 +1,4 @@
+import { DescobertasPerfil } from "../../src/components/perfil/DescobertasPerfil";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -22,10 +23,11 @@ export default function Perfil() {
     try { await sair(); router.replace("/"); }
     catch { setErroSaida("Não foi possível encerrar. Tente novamente."); setSaindo(false); }
   }
-  return <Tela fundo={colors.profileBackground}>
+  return <Tela>
     <Cabecalho legenda="DO SEU JEITO" titulo="Seu espaço" descricao="Cada descoberta começa com você." />
     <View style={s.identidade}><View style={s.avatar}>{identificado ? <Text style={s.iniciais}>{exibicao.slice(0, 1).toUpperCase()}</Text> : <Ionicons name="person-outline" size={30} color={colors.accentDark} />}</View><View style={{ flex: 1, gap: 4 }}><Text style={s.nome}>Olá, {exibicao}.</Text><Text style={v.descricao}>{identificado ? email : "Que bom ter você por aqui."}</Text></View></View>
     {!identificado ? <View style={s.convite}><Ionicons name="sparkles-outline" size={24} color={colors.accentDark} /><Text style={v.secaoTitulo}>Guarde suas descobertas</Text><Text style={v.descricao}>Crie seu acesso para continuar sua jornada cultural.</Text><Botao texto="Entrar ou criar conta" onPress={() => router.push("/login")} /></View> : null}
+    <DescobertasPerfil />
     <Secao titulo="Suas preferências" />
     <View style={v.bloco}>
       <SeletorCidade variante="linha" />

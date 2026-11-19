@@ -115,7 +115,7 @@ const s = StyleSheet.create({
   trocar: { fontFamily: fonts.semibold, fontSize: 12, color: colors.accentDark },
   etiquetas: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
   etiqueta: { flexDirection: "row", alignItems: "center", gap: 6, minHeight: MIN_TOUCH, paddingHorizontal: 16, borderRadius: 24, backgroundColor: colors.surface },
-  etiquetaAtiva: { backgroundColor: colors.earth },
+  etiquetaAtiva: { backgroundColor: colors.accent },
   etiquetaTexto: { fontFamily: fonts.semibold, fontSize: 12, color: colors.earth },
   cartao: { minHeight: 64, borderRadius: radius.card, borderWidth: 1.5, borderColor: colors.surface3, backgroundColor: colors.surface, paddingHorizontal: 18, flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
   cartaoAtivo: { borderColor: colors.accent, backgroundColor: colors.accentSoft },

@@ -1,3 +1,5 @@
+import { useFavoritos } from "../../src/locais/useFavoritos";
+import { useSessao } from "../../src/sessao/SessaoProvider";
 import { buscarFotoLocal } from "../../src/mocks/fotos";
 import { useState } from "react";
 import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
@@ -19,6 +21,8 @@ import { colors, fonts } from "../../src/theme/tokens";
 
 export default function DetalheLocal() {
   const router = useRouter();
+  const favoritos = useFavoritos();
+  const { usuarioId } = useSessao();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { local, carregando, erro, recarregar } = useLocal(Array.isArray(id) ? id[0] : id);
   const { coordenadas } = useLocalizacao();
@@ -42,6 +46,8 @@ export default function DetalheLocal() {
       ["time-outline", rotuloTempo(lugar)],
     ] as const).map(([icone, texto]) => <View key={icone} style={s.fato}><Ionicons name={icone} size={22} color={colors.accentDark} /><Text style={s.fatoTexto}>{texto}</Text></View>)}</View>
     <View style={s.capa}><Capa local={lugar} grande /></View>
+    <Botao texto={favoritos.salvando ? "Salvando…" : favoritos.ids.includes(lugar.id) ? "Salvo · remover da minha lista" : "♡ Quero conhecer"} secundario disabled={Boolean(usuarioId) && (!favoritos.pronto || favoritos.salvando)} onPress={() => { if (!usuarioId) router.push("/login"); else void favoritos.alternar(lugar.id); }} />
+    {favoritos.erro ? <Text accessibilityRole="alert" style={v.erro}>{favoritos.erro}</Text> : null}
     {foto?.galeria ? (
       <View style={{ gap: 12 }}>
         <Text accessibilityRole="header" style={v.secaoTitulo}>Fotos do lugar</Text>
