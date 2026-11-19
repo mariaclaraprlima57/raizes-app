@@ -9,10 +9,15 @@ const fotosLocais: Record<string, FotoLocal | undefined> = {
     ajuste: "contain",
   },
   "praca-dos-girassois": {
-    source: require("../../assets/images/locais/praca-dos-girassois.jpg"),
-    autor: "JorgeBrazil",
-    licenca: "CC BY 2.0",
-    pagina: "https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_Araguaia_em_Palmas%2C_Tocantins%2C_Brasil.jpg",
+    source: require("../../assets/images/locais/praca-dos-girassois-1.png"),
+    galeria: [
+      { source: require("../../assets/images/locais/praca-dos-girassois-1.png"), descricao: "Fachada do Palácio Araguaia vista da Praça dos Girassóis" },
+      { source: require("../../assets/images/locais/praca-dos-girassois-2.png"), descricao: "Conjunto de esculturas na Praça dos Girassóis" },
+      { source: require("../../assets/images/locais/praca-dos-girassois-3.png"), descricao: "Monumento à Bíblia e marco do Centro Geodésico do Brasil" },
+      { source: require("../../assets/images/locais/praca-dos-girassois-4.png"), descricao: "Cascata com o Palácio Araguaia ao fundo" },
+      { source: require("../../assets/images/locais/praca-dos-girassois-5.png"), descricao: "Espelho d'água entre jardins da praça" },
+      { source: require("../../assets/images/locais/praca-dos-girassois-6.png"), descricao: "Cruzeiro e altar ao ar livre" },
+    ],
   },
   "memorial-coluna-prestes": {
     source: require("../../assets/images/locais/memorial-coluna-prestes.jpg"),
@@ -21,10 +26,13 @@ const fotosLocais: Record<string, FotoLocal | undefined> = {
     pagina: "https://commons.wikimedia.org/wiki/File:Memorial_Coluna_Prestes_01.jpg",
   },
   "palacinho": {
-    source: require("../../assets/images/locais/palacinho.jpg"),
-    autor: "Túllio F",
-    licenca: "CC BY-SA 4.0",
-    pagina: "https://commons.wikimedia.org/wiki/File:Museu_Hist%C3%B3rico_do_Tocantins_-_Palacinho_33.jpg",
+    source: require("../../assets/images/locais/palacinho-1.png"),
+    galeria: [
+      { source: require("../../assets/images/locais/palacinho-1.png"), descricao: "Fachada de madeira do Palacinho e palmeiras" },
+      { source: require("../../assets/images/locais/palacinho-2.png"), descricao: "Caminho arborizado até a capela do complexo" },
+      { source: require("../../assets/images/locais/palacinho-3.png"), descricao: "Pátio e construções do Museu Histórico do Tocantins" },
+      { source: require("../../assets/images/locais/palacinho-4.png"), descricao: "Objetos e mobiliário em exposição no museu" },
+    ],
   },
   "espaco-cultural-jose-gomes-sobrinho": {
     source: require("../../assets/images/locais/espaco-cultural-1.png"),
@@ -50,7 +58,7 @@ const fotosLocais: Record<string, FotoLocal | undefined> = {
     ],
   },
   "parque-cesamar": {
-    source: require("../../assets/images/locais/parque-cesamar-1.png"),
+    source: require("../../assets/images/locais/parque-cesamar-capa.png"),
     galeria: [
       { source: require("../../assets/images/locais/parque-cesamar-1.png"), descricao: "Cascata e espelho d'água" },
       { source: require("../../assets/images/locais/parque-cesamar-2.png"), descricao: "Capivaras no gramado" },
@@ -60,10 +68,7 @@ const fotosLocais: Record<string, FotoLocal | undefined> = {
     ],
   },
   "praia-da-graciosa": {
-    source: require("../../assets/images/locais/praia-da-graciosa.jpg"),
-    autor: "Túllio F",
-    licenca: "CC BY-SA 4.0",
-    pagina: "https://commons.wikimedia.org/wiki/File:Praia_Graciosa_-_Palmas.jpg",
+    source: require("../../assets/images/locais/praia-da-graciosa-1.png"),
   },
 };
 

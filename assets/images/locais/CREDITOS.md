@@ -30,3 +30,11 @@ Fotos do Wikimedia Commons. Apresentadas com recorte visual para preencher os ca
 - **feira-304-sul-1.png a feira-304-sul-3.png** — imagens fornecidas pelo usuário para a Feira da 304 Sul. Autoria e licença não informadas. A primeira é a capa e todas integram a galeria.
 
 - **parque-povos-indigenas-1.png e parque-povos-indigenas-2.png** — imagens fornecidas pelo usuário para o Parque dos Povos Indígenas. Autoria e licença não informadas. A primeira é a capa e ambas integram a galeria.
+
+- **praca-dos-girassois-1.png a praca-dos-girassois-6.png** — imagens fornecidas pelo usuário para a Praça dos Girassóis. Autoria e licença não informadas. A primeira é a capa e todas integram a galeria.
+
+- **praia-da-graciosa-1.png** — imagem do pôr do sol fornecida pelo usuário para a capa da Praia da Graciosa. Autoria e licença não informadas.
+
+- **palacinho-1.png a palacinho-4.png** — imagens fornecidas pelo usuário para o Museu Histórico do Tocantins — Palacinho. Autoria e licença não informadas. A primeira é a capa e todas integram a galeria.
+
+- **parque-cesamar-capa.png** — imagem noturna fornecida pelo usuário para a capa do Parque Cesamar. Autoria e licença não informadas.
