@@ -10,7 +10,7 @@ export default function Root({ children }: PropsWithChildren) {
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       <meta name="google" content="notranslate" />
-      <meta name="theme-color" content="#f4ede3" />
+      <meta name="theme-color" content="#faf7f4" />
       <meta name="application-name" content="Raízes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -46,7 +46,7 @@ const DOCUMENTO_MOBILE = `
   html, body, #root {
     min-height: 100%;
     min-height: 100dvh;
-    background-color: #f4ede3;
+    background-color: #faf7f4;
   }
 
   html {

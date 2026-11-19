@@ -51,8 +51,8 @@ export default function RootLayout() {
   }
 
   return (
-    <SafeAreaProvider style={{ backgroundColor: colors.paper }}>
-      <View style={{ flex: 1, width: "100%", maxWidth: Platform.OS === "web" ? 520 : undefined, alignSelf: "center" }}>
+    <SafeAreaProvider style={{ backgroundColor: colors.surface2 }}>
+      <View style={{ flex: 1, width: "100%", maxWidth: Platform.OS === "web" ? 520 : undefined, alignSelf: "center", backgroundColor: colors.surface2 }}>
       <SessaoProvider sessaoInicial={sessao.sessaoInicial}>
         <PreferenciasProvider>
           <LocalizacaoProvider>
