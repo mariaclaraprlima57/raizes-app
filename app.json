@@ -49,7 +49,7 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "baseUrl": "/dev-moveis"
+      "baseUrl": "/raizes-app"
     }
   }
 }

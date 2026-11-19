@@ -1,18 +1,18 @@
 {
-  "id": "/dev-moveis/",
+  "id": "/raizes-app/",
   "name": "Raízes — Turismo em Palmas",
   "short_name": "Raízes",
   "description": "Descubra lugares, histórias e roteiros culturais de Palmas, Tocantins.",
   "lang": "pt-BR",
-  "start_url": "/dev-moveis/",
-  "scope": "/dev-moveis/",
+  "start_url": "/raizes-app/",
+  "scope": "/raizes-app/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#faf7f4",
   "theme_color": "#8f3f1b",
   "icons": [
     {
-      "src": "/dev-moveis/raizes-icon.png",
+      "src": "/raizes-app/raizes-icon.png",
       "sizes": "any",
       "type": "image/png",
       "purpose": "any maskable"
