@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useSessao } from "../src/sessao/SessaoProvider";
 import { colors, fonts, radius, spacing } from "../src/theme/tokens";
 
-const FUNDO = require("../assets/images/locais/praia-da-graciosa-1.png");
+const FUNDO = require("../assets/images/cachoeira-abertura.jpg");
 
 export default function Abertura() {
   const router = useRouter();
