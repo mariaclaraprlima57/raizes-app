@@ -31,8 +31,8 @@
       "shortName": "Raízes",
       "lang": "pt-BR",
       "description": "Descubra lugares, histórias e roteiros culturais de Palmas, Tocantins.",
-      "themeColor": "#8f3f1b",
-      "backgroundColor": "#faf7f4",
+      "themeColor": "#f4ede3",
+      "backgroundColor": "#f4ede3",
       "favicon": "./assets/images/icon.png"
     },
     "plugins": [

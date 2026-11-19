@@ -8,8 +8,8 @@
   "scope": "/raizes-app/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#faf7f4",
-  "theme_color": "#8f3f1b",
+  "background_color": "#f4ede3",
+  "theme_color": "#f4ede3",
   "icons": [
     {
       "src": "/raizes-app/raizes-icon.png",
