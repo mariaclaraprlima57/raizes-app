@@ -66,9 +66,9 @@ export default function RootLayout() {
   );
 }
 
-// As guardas tiram da pilha o que não faz sentido para o estado atual: com
-// sessão, a abertura some e "voltar" a partir das abas não cai nela; sem
-// sessão, as abas não existem e um link direto para /mapa cai na abertura.
+// A abertura continua disponível com ou sem sessão: ela é a porta de entrada
+// visual do aplicativo e permite escolher conta ou visitante. Sem sessão, as
+// abas continuam protegidas e um link direto para /mapa cai na abertura.
 // O login fica sem guarda de propósito: ele precisa continuar montado depois
 // de a sessão mudar, para mostrar o sucesso antes de navegar, e o visitante
 // precisa alcançá-lo para entrar com conta. A ordem importa: quando a
@@ -84,9 +84,7 @@ function Rotas() {
     <>
     <TituloPagina titulo={tituloDaRota(caminho, temSessao)} />
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Protected guard={!temSessao}>
-        <Stack.Screen name="index" options={{ title: "Raízes" }} />
-      </Stack.Protected>
+      <Stack.Screen name="index" options={{ title: "Raízes" }} />
       <Stack.Protected guard={temSessao}>
         <Stack.Screen name="(tabs)" options={{ title: "Raízes" }} />
         <Stack.Screen name="local/[id]" options={{ title: "Lugar" }} />

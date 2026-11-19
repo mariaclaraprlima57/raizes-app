@@ -1,57 +1,195 @@
-import { useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import { useSessao } from "../src/sessao/SessaoProvider";
-import { Botao, v } from "../src/components/visual/Guia";
-import { colors, fonts } from "../src/theme/tokens";
+import { colors, fonts, gradients, radius, spacing } from "../src/theme/tokens";
+
+const FUNDO = require("../assets/images/splash-bg.jpg");
 
 export default function Abertura() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { entrarComoVisitante } = useSessao();
+  const { estado, entrarComoVisitante, sair } = useSessao();
   const [entrando, setEntrando] = useState(false);
-  async function explorar() {
-    setEntrando(true);
-    await entrarComoVisitante();
-    router.replace("/(tabs)");
+
+  function entrarNaConta() {
+    if (estado === "identificado") {
+      router.replace("/(tabs)");
+      return;
+    }
+    router.push("/login");
   }
-  return <ScrollView style={s.tela} contentContainerStyle={s.conteudo} bounces={false}>
-    <StatusBar style="light" />
-    <View style={s.fundo}>
-      <Image source={require("../assets/images/splash-bg.jpg")} style={StyleSheet.absoluteFill} contentFit="cover" contentPosition="center" accessible={false} />
-      <View pointerEvents="none" style={[StyleSheet.absoluteFill, s.veu]} />
-      <LinearGradient colors={["rgba(28,25,23,0.12)", "rgba(28,25,23,0.65)"]} style={StyleSheet.absoluteFill} pointerEvents="none" />
-      <View style={[s.marcaBloco, { paddingTop: insets.top + 28 }]}>
-        <Text accessibilityRole="header" style={s.marca}>Raízes</Text>
-        <View style={s.selo}><Text style={s.seloTexto}>CULTURA QUE CONECTA</Text></View>
+
+  async function explorarSemConta() {
+    if (entrando) return;
+    setEntrando(true);
+    try {
+      // A escolha explícita por visitante também encerra uma conta anterior.
+      if (estado === "identificado") await sair();
+      await entrarComoVisitante();
+      router.replace("/(tabs)/explorar");
+    } finally {
+      setEntrando(false);
+    }
+  }
+
+  const rotuloConta = estado === "identificado"
+    ? "Continuar na minha conta"
+    : "Entrar ou criar conta";
+
+  return (
+    <View style={styles.tela}>
+      <Image
+        source={FUNDO}
+        style={StyleSheet.absoluteFill}
+        contentFit="cover"
+        contentPosition="center"
+        transition={300}
+        accessible={false}
+      />
+      <LinearGradient
+        colors={gradients.screenTop.colors}
+        locations={gradients.screenTop.locations}
+        style={StyleSheet.absoluteFill}
+        pointerEvents="none"
+      />
+      <LinearGradient
+        colors={gradients.screenBottom.colors}
+        locations={gradients.screenBottom.locations}
+        style={StyleSheet.absoluteFill}
+        pointerEvents="none"
+      />
+
+      <View style={[styles.conteudo, {
+        paddingTop: insets.top + 24,
+        paddingBottom: insets.bottom + 24,
+      }]}>
+        <View style={styles.marca}>
+          <Text accessibilityRole="header" style={styles.logotipo}>Raízes</Text>
+          <Text style={styles.sobretitulo}>Descoberta cultural</Text>
+        </View>
+
+        <View style={styles.acoes}>
+          <Text style={styles.chamada}>
+            Conheça Palmas pelas pessoas, culturas e histórias que construíram
+            sua identidade.
+          </Text>
+
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={rotuloConta}
+            disabled={entrando}
+            onPress={entrarNaConta}
+            style={({ pressed }) => [
+              styles.primarioWrapper,
+              pressed && styles.primarioPressionado,
+            ]}
+          >
+            <LinearGradient
+              colors={[colors.accent, colors.accentDark]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.primario}
+            >
+              <Text style={styles.primarioRotulo}>{rotuloConta}</Text>
+            </LinearGradient>
+          </Pressable>
+
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Explorar como visitante, sem conta"
+            accessibilityState={{ disabled: entrando, busy: entrando }}
+            disabled={entrando}
+            onPress={explorarSemConta}
+            style={({ pressed }) => [
+              styles.visitante,
+              pressed && styles.visitantePressionado,
+            ]}
+          >
+            <Text style={styles.visitanteRotulo}>
+              {entrando ? "Preparando seu caminho…" : "Explorar como visitante"}
+            </Text>
+          </Pressable>
+        </View>
       </View>
-      <View style={s.cidade}><Text style={s.cidadeTexto}>PALMAS · TO</Text></View>
     </View>
-    <View style={[s.folha, { paddingBottom: insets.bottom + 24 }]}>
-      <Text style={v.legenda}>DESCUBRA. SINTA. PERTENÇA.</Text>
-      <Text style={s.titulo}>Um novo olhar para cada lugar.</Text>
-      <Text style={s.descricao}>Conheça as histórias, as pessoas e a cultura que fazem uma cidade ser única.</Text>
-      <Botao texto={entrando ? "Preparando seu caminho…" : "Explorar sem conta"} disabled={entrando} onPress={explorar} />
-      <Botao texto="Entrar ou criar conta" secundario onPress={() => router.push("/login")} />
-    </View>
-  </ScrollView>;
+  );
 }
-const s = StyleSheet.create({
-  tela: { flex: 1, backgroundColor: colors.paper },
-  conteudo: { flexGrow: 1 },
-  fundo: { flex: 1, minHeight: 320, backgroundColor: colors.earth },
-  veu: { backgroundColor: "rgba(28,25,23,0.42)" },
-  marcaBloco: { paddingHorizontal: 28, paddingBottom: 70, gap: 6 },
-  marca: { fontFamily: fonts.extrabold, fontSize: 58, lineHeight: 70, letterSpacing: -2.5, color: colors.onDark },
-  selo: { alignSelf: "flex-start", paddingHorizontal: 12, paddingVertical: 7, backgroundColor: colors.onDarkSoft, borderRadius: 20 },
-  seloTexto: { fontFamily: fonts.semibold, fontSize: 9, letterSpacing: 1.2, color: colors.earth },
-  cidade: { position: "absolute", bottom: 38, right: 20, paddingHorizontal: 12, paddingVertical: 7, borderRadius: 20, backgroundColor: "rgba(28,25,23,0.55)" },
-  cidadeTexto: { fontFamily: fonts.semibold, fontSize: 9, letterSpacing: 1.2, color: colors.onDark },
-  folha: { backgroundColor: colors.paper, marginTop: -28, borderTopLeftRadius: 30, borderTopRightRadius: 30, paddingTop: 26, paddingHorizontal: 28, gap: 16 },
-  titulo: { fontFamily: fonts.extrabold, fontSize: 32, lineHeight: 38, letterSpacing: -1.2, color: colors.text },
-  descricao: { fontFamily: fonts.regular, fontSize: 13, lineHeight: 22, color: colors.textMuted },
+
+const styles = StyleSheet.create({
+  tela: { flex: 1, backgroundColor: colors.bg },
+  conteudo: {
+    flex: 1,
+    justifyContent: "space-between",
+    paddingHorizontal: spacing.pageX,
+  },
+  marca: { gap: 9 },
+  logotipo: {
+    fontFamily: fonts.extrabold,
+    fontSize: 42,
+    lineHeight: 46,
+    letterSpacing: -0.84,
+    color: colors.onDark,
+  },
+  sobretitulo: {
+    fontFamily: fonts.semibold,
+    fontSize: 12,
+    letterSpacing: 0.48,
+    textTransform: "uppercase",
+    color: colors.onDarkMuted,
+  },
+  acoes: { gap: 10 },
+  chamada: {
+    maxWidth: 290,
+    marginBottom: 8,
+    fontFamily: fonts.regular,
+    fontSize: 15,
+    lineHeight: 24,
+    color: colors.onDarkSoft,
+  },
+  primarioWrapper: {
+    borderRadius: radius.button,
+    shadowColor: colors.accent,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.22,
+    shadowRadius: 16,
+    elevation: 6,
+  },
+  primarioPressionado: {
+    transform: [{ scale: 0.97 }],
+    shadowOpacity: 0.12,
+  },
+  primario: {
+    minHeight: 52,
+    borderRadius: radius.button,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  primarioRotulo: {
+    fontFamily: fonts.semibold,
+    fontSize: 16,
+    color: colors.onDark,
+  },
+  visitante: {
+    minHeight: 48,
+    borderRadius: radius.button,
+    borderWidth: 1.5,
+    borderColor: colors.borderOnDark,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  visitantePressionado: {
+    transform: [{ scale: 0.98 }],
+    borderColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.06)",
+  },
+  visitanteRotulo: {
+    fontFamily: fonts.semibold,
+    fontSize: 15,
+    color: colors.onDarkMuted,
+  },
 });
