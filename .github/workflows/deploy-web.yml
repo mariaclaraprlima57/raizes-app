@@ -35,6 +35,9 @@ jobs:
         env:
           EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
           EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+          # Enquanto a Edge Function e a chave da Anthropic não forem
+          # publicadas, mantém a geração funcional e restrita ao catálogo.
+          EXPO_PUBLIC_MODO_IA_DEMO: "true"
 
       - name: Configurar o GitHub Pages
         uses: actions/configure-pages@v5
