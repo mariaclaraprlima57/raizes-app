@@ -24,7 +24,17 @@
         "backgroundColor": "#12100e"
       }
     },
-    "web": { "bundler": "metro", "output": "static" },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "name": "Raízes — Turismo em Palmas",
+      "shortName": "Raízes",
+      "lang": "pt-BR",
+      "description": "Descubra lugares, histórias e roteiros culturais de Palmas, Tocantins.",
+      "themeColor": "#8f3f1b",
+      "backgroundColor": "#faf7f4",
+      "favicon": "./assets/images/icon.png"
+    },
     "plugins": [
       "expo-router",
       "expo-font",
@@ -37,6 +47,9 @@
         }
       ]
     ],
-    "experiments": { "typedRoutes": true }
+    "experiments": {
+      "typedRoutes": true,
+      "baseUrl": "/dev-moveis"
+    }
   }
 }
