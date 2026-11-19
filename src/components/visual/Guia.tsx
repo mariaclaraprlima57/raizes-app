@@ -5,7 +5,7 @@ import { Image } from "expo-image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, type Href } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { fotosLocais } from "../../mocks/fotos";
+import { buscarFotoLocal } from "../../mocks/fotos";
 import type { LocalLista } from "../../mocks/locais";
 import { interessesQueCombinam } from "../../preferencias/afinidade";
 import { INTERESSES, type InteresseId } from "../../preferencias/dados";
@@ -39,13 +39,13 @@ export function Estado({ titulo, descricao, icone = "compass-outline", carregand
   return <View accessibilityLiveRegion="polite" style={v.estado}>{carregando ? <ActivityIndicator accessibilityLabel={titulo} color={colors.accent} /> : <View style={v.disco}><Ionicons name={icone} size={28} color={colors.accentDark} /></View>}<Text style={v.secaoTitulo}>{titulo}</Text>{descricao ? <Text style={[v.descricao, { textAlign: "center" }]}>{descricao}</Text> : null}</View>;
 }
 export function Capa({ local, grande = false }: { local: LocalLista; grande?: boolean }) {
-  const foto = fotosLocais[local.id];
+  const foto = buscarFotoLocal(local.id);
   const source = local.imagemUrl ? { uri: local.imagemUrl } : foto?.source;
   return <View style={[v.capa, grande && { height: 240 }]}>
-    {source ? <Image source={source} accessibilityLabel={`Foto de ${local.nome}`} style={StyleSheet.absoluteFill} contentFit="cover" transition={180} /> : <View accessible={false} style={v.ilustracao}>
+    {source ? <Image source={source} accessibilityLabel={`Foto de ${local.nome}`} style={StyleSheet.absoluteFill} contentFit={local.imagemUrl ? "cover" : foto?.ajuste ?? "cover"} transition={180} /> : <View accessible={false} style={v.ilustracao}>
       <View style={v.orbita} /><View style={v.sol} /><Ionicons name={iconesCategoria[local.categoria] ?? "compass-outline"} size={grande ? 80 : 60} color={colors.earth} />
     </View>}
-    {!local.imagemUrl && foto ? <Text style={v.credito}>{foto.autor} · {foto.licenca}</Text> : null}
+    {!local.imagemUrl && foto?.autor && foto.licenca ? <Text style={v.credito}>{foto.autor} · {foto.licenca}</Text> : null}
     <View style={v.categoria}><Text style={v.categoriaTexto}>{rotuloCategoria(local.categoria)}</Text></View>
   </View>;
 }

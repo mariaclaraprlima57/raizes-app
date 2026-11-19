@@ -10,3 +10,23 @@ Fotos do Wikimedia Commons. Apresentadas com recorte visual para preencher os ca
 - **paco-frevo** — Boaventuravinicius; CC BY-SA 3.0. [Original](https://commons.wikimedia.org/wiki/File:Pa%C3%A7o_do_Frevo_2026.jpg). [Licença](https://creativecommons.org/licenses/by-sa/3.0).
 - **cais-sertao** — Luci Correia; CC BY 2.0. [Original](https://commons.wikimedia.org/wiki/File:Museu_Cais_do_Sert%C3%A3o,_Recife.jpg). [Licença](https://creativecommons.org/licenses/by/2.0).
 - **casa-cultura-pernambuco** — chivunck; CC BY-SA 3.0. [Original](https://commons.wikimedia.org/wiki/File:Casa_da_Cultura_-_Recife,_Pernambuco,_Brasil.jpg). [Licença](https://creativecommons.org/licenses/by-sa/3.0).
+
+## Palmas
+
+- **cachoeira-da-roncadeira** - Nibelle Aires Lira e Fernando Mayer Pelicice (2020), Figura 1. [Original](https://periodicos.unifesp.br/ecoturismo/article/view/6837). [Licença CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Figura integral em PNG para o catálogo demonstrativo não comercial.
+
+- **praca-dos-girassois** — JorgeBrazil · CC BY 2.0. [Original](https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_Araguaia_em_Palmas%2C_Tocantins%2C_Brasil.jpg). [Licença](https://creativecommons.org/licenses/by/2.0).
+- **memorial-coluna-prestes** — Brunno Oliveira · CC BY 2.0. [Original](https://commons.wikimedia.org/wiki/File:Memorial_Coluna_Prestes_01.jpg). [Licença](https://creativecommons.org/licenses/by/2.0).
+- **palacinho** — Túllio F · CC BY-SA 4.0. [Original](https://commons.wikimedia.org/wiki/File:Museu_Hist%C3%B3rico_do_Tocantins_-_Palacinho_33.jpg). [Licença](https://creativecommons.org/licenses/by-sa/4.0).
+- **parque-cesamar** — Camarão do Mar · CC BY-SA 4.0. [Original](https://commons.wikimedia.org/wiki/File:PARQUE_CESAMAR.jpg). [Licença](https://creativecommons.org/licenses/by-sa/4.0).
+- **praia-da-graciosa** — Túllio F · CC BY-SA 4.0. [Original](https://commons.wikimedia.org/wiki/File:Praia_Graciosa_-_Palmas.jpg). [Licença](https://creativecommons.org/licenses/by-sa/4.0).
+
+## Imagens enviadas pelo usuário
+
+- **parque-cesamar-1.png a parque-cesamar-5.png** — imagens fornecidas pelo usuário para o Parque Cesamar. Autoria e licença não informadas. A primeira é a capa e todas integram a galeria.
+
+- **espaco-cultural-1.png a espaco-cultural-3.png** — imagens fornecidas pelo usuário para o Espaço Cultural José Gomes Sobrinho. Autoria e licença não informadas. A primeira é a capa e todas integram a galeria.
+
+- **feira-304-sul-1.png a feira-304-sul-3.png** — imagens fornecidas pelo usuário para a Feira da 304 Sul. Autoria e licença não informadas. A primeira é a capa e todas integram a galeria.
+
+- **parque-povos-indigenas-1.png e parque-povos-indigenas-2.png** — imagens fornecidas pelo usuário para o Parque dos Povos Indígenas. Autoria e licença não informadas. A primeira é a capa e ambas integram a galeria.

@@ -1,6 +1,7 @@
-import { fotosLocais } from "../../src/mocks/fotos";
+import { buscarFotoLocal } from "../../src/mocks/fotos";
 import { useState } from "react";
-import { Linking, Pressable, StyleSheet, Text, View } from "react-native";
+import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image } from "expo-image";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { SecaoAcessibilidade, SecaoAmbienteSensorial } from "../../src/components/local/SecoesAcessibilidade";
@@ -29,6 +30,7 @@ export default function DetalheLocal() {
   if (!local) return <Tela><Vazio icone="location-outline" titulo="Lugar indisponível" mensagem="Este lugar não está mais disponível no catálogo." acao={{ texto: "Voltar a explorar", onPress: voltar }} /></Tela>;
   const lugar = ordenarPorProximidade([local], local.cidadeId, coordenadas)[0];
   const afinidades = interessesQueCombinam(lugar, interesses);
+  const foto = buscarFotoLocal(lugar.id);
   return <Tela>
     <Stack.Screen options={{ title: lugar.nome }} />
     <TituloPagina titulo={lugar.nome} />
@@ -40,6 +42,19 @@ export default function DetalheLocal() {
       ["time-outline", rotuloTempo(lugar)],
     ] as const).map(([icone, texto]) => <View key={icone} style={s.fato}><Ionicons name={icone} size={22} color={colors.accentDark} /><Text style={s.fatoTexto}>{texto}</Text></View>)}</View>
     <View style={s.capa}><Capa local={lugar} grande /></View>
+    {foto?.galeria ? (
+      <View style={{ gap: 12 }}>
+        <Text accessibilityRole="header" style={v.secaoTitulo}>Fotos do lugar</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator contentContainerStyle={{ gap: 12 }}>
+          {foto.galeria.map((imagem, index, imagens) => (
+            <View key={imagem.source} style={{ width: 280, gap: 8 }}>
+              <Image source={imagem.source} accessibilityLabel={imagem.descricao} contentFit="contain" style={{ width: 280, height: 220, borderRadius: 18, backgroundColor: colors.paper }} />
+              <Text style={v.descricao}>{index + 1} / {imagens.length} · {imagem.descricao}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+    ) : null}
     <View style={[v.bloco, { backgroundColor: colors.paper }]}>
       <Text accessibilityRole="header" style={v.secaoTitulo}>Sobre</Text>
       <Text style={[v.descricao, { color: colors.earth }]}>{lugar.porQueConhecer}</Text>
@@ -53,7 +68,7 @@ export default function DetalheLocal() {
     <SecaoAmbienteSensorial ambiente={local.ambienteSensorial} />
     <View style={v.bloco}><Text accessibilityRole="header" style={v.secaoTitulo}>Como chegar</Text><View style={s.linha}><Ionicons name="location-outline" size={18} color={colors.accentDark} /><Text style={[v.descricao, { flex: 1 }]}>{lugar.endereco}</Text></View>{rotuloHorarios(lugar) ? <Text style={v.descricao}>{rotuloHorarios(lugar)}</Text> : null}<Botao texto="Explorar o mapa" secundario onPress={() => router.push("/(tabs)/mapa")} /></View>
     <Text style={[v.descricao, { fontSize: 11 }]}>{rotuloFonte(lugar)}</Text>
-    {!lugar.imagemUrl && fotosLocais[lugar.id] ? <Pressable accessibilityRole="link" style={{ minHeight: 44, justifyContent: "center" }} onPress={() => { void Linking.openURL(fotosLocais[lugar.id].pagina); }}><Text style={v.descricao}>Fotografia: {fotosLocais[lugar.id].autor} · {fotosLocais[lugar.id].licenca}. Ver original e licença ↗</Text></Pressable> : null}
+    {!lugar.imagemUrl && foto?.pagina ? <Pressable accessibilityRole="link" style={{ minHeight: 44, justifyContent: "center" }} onPress={() => { void Linking.openURL(foto.pagina!); }}><Text style={v.descricao}>Fotografia: {foto.autor} · {foto.licenca}. Ver original e licença ↗</Text></Pressable> : null}
   </Tela>;
 }
 const s = StyleSheet.create({ topo: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" }, voltar: { width: 46, height: 46, borderRadius: 23, backgroundColor: colors.surface, alignItems: "center", justifyContent: "center" }, capa: { borderRadius: 26, overflow: "hidden" }, linha: { flexDirection: "row", gap: 8, alignItems: "center" }, fatos: { flexDirection: "row", flexWrap: "wrap", gap: 10 }, fato: { flexGrow: 1, flexBasis: 96, minHeight: 92, padding: 16, backgroundColor: colors.surface, borderRadius: 22, gap: 8 }, fatoTexto: { fontFamily: fonts.semibold, color: colors.earth, fontSize: 12, lineHeight: 17 }, historia: { fontFamily: fonts.regular, fontSize: 14, lineHeight: 23, color: colors.earth }, etiquetaAfinidade: { flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: colors.accentSoft }, etiquetaAfinidadeTexto: { color: colors.accentDark } });
